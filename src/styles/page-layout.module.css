@@ -1,0 +1,31 @@
+.header{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    margin-bottom: 10px;
+    border-top: 5px solid #ba1a1b;
+}
+.logoTitle{
+    flex-flow: row wrap;
+    align-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+.logo{
+    max-width:60px;
+    object-fit: cover;
+    margin: 5px 15px 5px 0px;
+}
+.pageWidth {
+    max-width: 900px;
+    margin: auto;
+    border-radius:10px;
+   
+}
+.container{
+    padding: 20px;
+}
