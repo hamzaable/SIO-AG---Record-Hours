@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SIO-AG---Record-Hours/static/css/main.c6631b9d.css",
+    "main.js": "/SIO-AG---Record-Hours/static/js/main.f006c3d7.js",
+    "static/js/787.561e2d11.chunk.js": "/SIO-AG---Record-Hours/static/js/787.561e2d11.chunk.js",
+    "static/media/logo.png": "/SIO-AG---Record-Hours/static/media/logo.1dc1df73e37d3d83cb25.png",
+    "index.html": "/SIO-AG---Record-Hours/index.html",
+    "main.c6631b9d.css.map": "/SIO-AG---Record-Hours/static/css/main.c6631b9d.css.map",
+    "main.f006c3d7.js.map": "/SIO-AG---Record-Hours/static/js/main.f006c3d7.js.map",
+    "787.561e2d11.chunk.js.map": "/SIO-AG---Record-Hours/static/js/787.561e2d11.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6631b9d.css",
+    "static/js/main.f006c3d7.js"
+  ]
+}
