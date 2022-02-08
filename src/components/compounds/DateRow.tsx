@@ -16,9 +16,10 @@ function DateRow(props: any) {
 		<div
 			style={{
 				display: "flex",
-				placeContent: "center flex-start",
 				alignItems: "center",
 				width: "100%",
+                justifyContent: 'space-between',
+                flexWrap:"wrap"
 			}}
 		>
 			<div
@@ -27,7 +28,6 @@ function DateRow(props: any) {
 					gap: "30px",
 					placeContent: "center flex-start",
 					alignItems: "center",
-					width: "100%",
 				}}
 			>
 				<div>
@@ -37,6 +37,7 @@ function DateRow(props: any) {
 							lineHeight: "1.6",
 							marginBottom: "0px",
 							width: "165px",
+                            color: "#ba1a1b" 
 						}}
 					>
 						{props.activeDate.format("DD.MM.YYYY") ===
@@ -92,7 +93,7 @@ function DateRow(props: any) {
 				</div>
 			</div>
 			<Button onClick={handleHideLog}>
-				{props.showNewLog  ? "Hide New Log" : "Show New Log"}
+				{props.showNewLog ? "Hide New Log" : "Add New Log"}
 			</Button>
 		</div>
 	);

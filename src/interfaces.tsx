@@ -5,5 +5,6 @@ export interface TIMELOG{
     taskname: string;
     startTime: Moment | undefined;
     finishTime: Moment | undefined;
-    date: any;
+    date:  Moment | undefined;
+    durationMinutes : number | undefined
 }

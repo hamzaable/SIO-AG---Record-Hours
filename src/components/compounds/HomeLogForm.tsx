@@ -2,23 +2,40 @@ import { Moment } from "moment";
 import React, { useEffect, useState } from "react";
 import { AddNewLogData } from "../../redux/timeLog/timeLogActions";
 import LogForm from "../elements/LogForm";
-import {useDispatch} from 'react-redux'
-
-
+import { useDispatch } from "react-redux";
+import { Button, notification } from "antd";
 const HomeLogForm = (props: any) => {
 	const [selectedDate, setSelectedDate] = useState(props.defaultDate);
 	const [selectedStartTime, setSelectedStartTime] = useState<Moment>();
 	const [selectedFinishTime, setSelectedFinishTime] = useState<Moment>();
 	const [taskname, setTaskname] = useState("");
 
-    const dispatch = useDispatch()
-
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		setSelectedDate(props.defaultDate);
 	}, [props]);
 
 	const AddNewLogHandler = () => {
+		if (taskname === "" || !selectedStartTime || !selectedFinishTime) {
+			notification["error"]({
+				message: "Error",
+				description: "Please Enter data in all fields",
+			});
+			return;
+		}
+
+		if (selectedStartTime.isAfter(selectedFinishTime)) {
+			notification["error"]({
+				message: "Error",
+				description: "Start time cannot be greater than finish time",
+			});
+			return;
+		}
+
+		const minutes = Math.round(
+			selectedFinishTime.diff(selectedStartTime, "minutes", true)
+		);
 		const data = {
 			id: Math.random()
 				.toString(36)
@@ -28,8 +45,18 @@ const HomeLogForm = (props: any) => {
 			startTime: selectedStartTime,
 			finishTime: selectedFinishTime,
 			date: selectedDate,
+			durationMinutes: minutes,
 		};
-		dispatch(AddNewLogData(data))
+		dispatch(AddNewLogData(data));
+
+		setTaskname("");
+		setSelectedStartTime(undefined);
+		setSelectedFinishTime(undefined);
+
+		notification["success"]({
+			message: "Log Added",
+			description: "Log added sucessfully",
+		});
 	};
 	return (
 		<>
@@ -52,20 +79,14 @@ const HomeLogForm = (props: any) => {
 				selectedFinishTime={selectedFinishTime}
 			/>
 
-			<button
+			<Button
 				style={{
 					width: "100%",
-					backgroundColor: "#ba1a1b",
-					border: 0,
-					borderRadius: "6px",
-					color: "white",
-					padding: "4px 0px",
-					cursor: "pointer",
 				}}
 				onClick={AddNewLogHandler}
 			>
 				Add New Log
-			</button>
+			</Button>
 		</>
 	);
 };

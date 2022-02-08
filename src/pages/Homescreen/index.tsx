@@ -5,13 +5,19 @@ import LogModal from "../../components/compounds/LogModal";
 import HomeLogForm from "../../components/compounds/HomeLogForm";
 import { Space } from "antd";
 import AntCard from "../../components/elements/AntCard";
+import LogCards from "../../components/compounds/LogCards";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+import LogChart from "../../components/compounds/LogChart";
 
 const Homescreen = () => {
 	const [activeDate, setActiveDate] = useState<moment.Moment>(moment());
 	const [showNewLog, setShowNewLog] = useState<boolean>(true);
-	useEffect(() => {
-		console.log(activeDate);
-	}, [activeDate]);
+
+	const showModal = useSelector((state: RootState) => {
+		return state.settings.showModal.isVisible;
+	});
+
 
 	return (
 		<>
@@ -28,15 +34,18 @@ const Homescreen = () => {
 						}}
 					/>
 				</AntCard>
-				<LogModal defaultDate={activeDate} />
+				{showModal && <LogModal defaultDate={activeDate} />}
 
 				{showNewLog && (
 					<AntCard>
-						<div style={{ maxWidth: "450px",margin:"auto" }}>
+						<div style={{ maxWidth: "450px", margin: "auto" }}>
 							<HomeLogForm defaultDate={activeDate} />
 						</div>
 					</AntCard>
 				)}
+
+				<LogCards defaultDate={activeDate} />
+				<LogChart  />
 			</Space>
 		</>
 	);

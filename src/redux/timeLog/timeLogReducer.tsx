@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loadState } from "../../functions";
+
 
 const initialState = {
 	LogData: [],

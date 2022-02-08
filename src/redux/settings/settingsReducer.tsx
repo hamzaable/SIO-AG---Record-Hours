@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
-    showModal:false,
+	showModal: { isVisible: false, openID: "id" },
 };
 
 const settingsSlice = createSlice({
 	name: "settingsReducer",
 	initialState,
 	reducers: {
-		updateModalState(state, action: any) {
+		setTimeLogModal(state, action) {
 			state.showModal = action.payload;
 		},
 	},

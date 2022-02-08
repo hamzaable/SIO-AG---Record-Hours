@@ -9,10 +9,10 @@ const LogForm = (props: any) => {
 		form.setFieldsValue({
 			timeStart: props.selectedStartTime,
 			timeFinish: props.selectedFinishTime,
-			taskname: props.description,
+			taskname: props.taskname,
 			date: props.selectedDate,
 		});
-	}, [props.selectedStartTime, props.selectedFinishTime, form, props.taskname, props.selectedDate, props.description]);
+	}, [props.selectedStartTime, props.selectedFinishTime, form, props.taskname, props.selectedDate]);
 
 	return (
 		<div>
@@ -25,7 +25,7 @@ const LogForm = (props: any) => {
 			>
 				<Row>
 					<Col span={24}>
-						<Form.Item label="Task Name" name="taskName" required >
+						<Form.Item label="Task Name" name="taskname"  >
 							<Input
 								value={props.description}
 								onChange={(e) => {
@@ -37,7 +37,7 @@ const LogForm = (props: any) => {
 					</Col>
 					<Row gutter={12}>
 						<Col>
-							<Form.Item label="Date" name="date" required>
+							<Form.Item label="Date" name="date" >
 								<DatePicker
 									placeholder="Select Date"
 									onChange={(e: any) => {
@@ -54,11 +54,10 @@ const LogForm = (props: any) => {
 						</Col>
 
 						<Col>
-							<Form.Item label="Time Start" name="timeStart" required>
+							<Form.Item label="Time Start" name="timeStart" >
 								<TimePicker
 									placeholder="Start Time"
 									minuteStep={10}
-									// defaultValue={moment("12:08", "HH:mm")}
 									format={"HH:mm"}
 									style={{ minWidth: "100%" }}
 									showNow={true}
@@ -67,8 +66,7 @@ const LogForm = (props: any) => {
 										"HH:mm"
 									)}
 									onSelect={( value) => {
-										// const timeString =
-										// 	moment(value).format("HH:mm");
+										
 										props.setSelectedStartTime(value);
 										form.setFieldsValue({
 											timeStart: value,
@@ -81,7 +79,7 @@ const LogForm = (props: any) => {
 							</Form.Item>
 						</Col>
 						<Col>
-							<Form.Item label="Time Finish" name="timeFinish" required>
+							<Form.Item label="Time Finish" name="timeFinish" >
 								<TimePicker
 									placeholder="Finish Time"
 									minuteStep={10}
