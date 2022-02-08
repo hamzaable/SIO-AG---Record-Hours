@@ -7,8 +7,10 @@ import { Space } from "antd";
 import AntCard from "../../components/elements/AntCard";
 import LogCards from "../../components/compounds/LogCards";
 import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LogChart from "../../components/compounds/LogChart";
+import { AddOldLogData } from "../../redux/timeLog/timeLogActions";
+import { TIMELOG } from "../../interfaces";
 
 const Homescreen = () => {
 	const [activeDate, setActiveDate] = useState<moment.Moment>(moment());
@@ -18,6 +20,24 @@ const Homescreen = () => {
 		return state.settings.showModal.isVisible;
 	});
 
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const existingData = JSON.parse(localStorage.getItem("logData")!);
+		if (existingData !== null) {
+			const cleanData = existingData.map((oneElem: TIMELOG) => {
+				return {
+					id: oneElem.id,
+					taskname: oneElem.taskname,
+					date: moment(oneElem.date),
+					startTime: moment(oneElem.startTime),
+					finishTime: moment(oneElem.finishTime),
+					durationMinutes: oneElem.durationMinutes,
+				};
+			});
+			dispatch(AddOldLogData(cleanData));
+		}
+		console.log("useEffect ~ existingData", existingData);
+	}, []);
 
 	return (
 		<>
@@ -45,7 +65,7 @@ const Homescreen = () => {
 				)}
 
 				<LogCards defaultDate={activeDate} />
-				<LogChart  />
+				<LogChart />
 			</Space>
 		</>
 	);

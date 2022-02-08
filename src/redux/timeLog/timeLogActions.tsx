@@ -8,7 +8,6 @@ export const AddNewLogData = (data: TIMELOG) => {
 	return async (dispatch: any, getState: any) => {
 		const state: RootState = getState();
 		const newData = [...state.timeLog.LogData, data];
-		console.log("return ~ newData", newData);
 		localStorage.setItem("logData", JSON.stringify(newData));
 		dispatch(updateAllData(newData));
 	};
@@ -48,6 +47,7 @@ export const deleteLog = (id: string) => {
 
 export const AddOldLogData = (data: TIMELOG[]) => {
 	return async (dispatch: any, getState: any) => {
+       
 		const newData = [...data];
 		dispatch(updateAllData(newData));
 	};
