@@ -19,12 +19,13 @@ const LogCards:React.FC<PROPS> = (props) => {
 
 	useEffect(() => {
 		const currentLogData = logData.filter((log) => {
-			if (log.date?.format("DD/mm/yyyy") === props.defaultDate.format("DD/mm/yyyy")) {
+			if (log.date?.format("DD.MM.YYYY") === props.defaultDate.format("DD.MM.YYYY")) {
 				return true;
 			} else {
 				return false;
 			}
 		});
+        console.log('currentLogData ~ currentLogData', currentLogData)
 		setData(currentLogData);
 	}, [logData, props.defaultDate]);
 
