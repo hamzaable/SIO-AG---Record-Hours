@@ -4,10 +4,17 @@ import {
 	ArrowRightOutlined,
 } from "@ant-design/icons";
 import { Typography, DatePicker, Button } from "antd";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import React, { useState } from "react";
 
-function DateRow(props: any) {
+interface PROPS {
+	activeDate: Moment;
+    setShowNewLog:(data:boolean)=>void;
+    setActiveDate:(data:Moment)=>void;
+    showNewLog:boolean;
+}
+
+const DateRow: React.FC<PROPS> = (props) => {
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const handleHideLog = () => {
 		props.setShowNewLog(!props.showNewLog);
@@ -18,8 +25,8 @@ function DateRow(props: any) {
 				display: "flex",
 				alignItems: "center",
 				width: "100%",
-                justifyContent: 'space-between',
-                flexWrap:"wrap"
+				justifyContent: "space-between",
+				flexWrap: "wrap",
 			}}
 		>
 			<div
@@ -37,7 +44,7 @@ function DateRow(props: any) {
 							lineHeight: "1.6",
 							marginBottom: "0px",
 							width: "165px",
-                            color: "#ba1a1b" 
+							color: "#ba1a1b",
 						}}
 					>
 						{props.activeDate.format("DD.MM.YYYY") ===
@@ -97,6 +104,6 @@ function DateRow(props: any) {
 			</Button>
 		</div>
 	);
-}
+};
 
 export default DateRow;

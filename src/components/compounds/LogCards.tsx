@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import OneLogCard from "../elements/oneLogCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, } from "react-redux";
 import { Col, Divider, Row, Space, Typography } from "antd";
 import { RootState } from "../../redux/store";
 import { makeTimeArray } from "../../functions";
 import { TIMELOG } from "../../interfaces";
+import { Moment } from "moment";
 
-function LogCards(props: any) {
+interface PROPS{
+    defaultDate:Moment;
+}
+
+const LogCards:React.FC<PROPS> = (props) => {
 	const [data, setData] = useState<TIMELOG[]>([]);
 	const logData: TIMELOG[] = useSelector(
 		(state: RootState) => state.timeLog.LogData
@@ -14,7 +19,7 @@ function LogCards(props: any) {
 
 	useEffect(() => {
 		const currentLogData = logData.filter((log) => {
-			if (log.date?.format("DD/mm/yyyy") == props.defaultDate.format("DD/mm/yyyy")) {
+			if (log.date?.format("DD/mm/yyyy") === props.defaultDate.format("DD/mm/yyyy")) {
 				return true;
 			} else {
 				return false;
@@ -26,8 +31,8 @@ function LogCards(props: any) {
     
 	const totalMinutes = () => {
 		const temp = makeTimeArray(
-			data.map((obj: any) => {
-					return obj.durationMinutes;
+			data.map((obj: TIMELOG) => {
+					return obj.durationMinutes!;
 				})
 				.reduce((a, b) => {
 					return a + b;

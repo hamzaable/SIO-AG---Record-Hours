@@ -6,11 +6,16 @@ import { getTimeLogModal } from "../../redux/settings/settingsActions";
 import { RootState } from "../../redux/store";
 import { TIMELOG } from "../../interfaces";
 import { UpdateLogData } from "../../redux/timeLog/timeLogActions";
+import { Moment } from "moment";
 
-const LogModal = (props: any) => {
-	const [selectedDate, setSelectedDate] = useState(props.defaultDate);
-	const [selectedStartTime, setSelectedStartTime] = useState<any>();
-	const [selectedFinishTime, setSelectedFinishTime] = useState<any>();
+interface PROPS{
+    defaultDate:Moment;
+}
+
+const LogModal:React.FC<PROPS> = (props) => {
+	const [selectedDate, setSelectedDate] = useState<Moment | undefined >(props.defaultDate);
+	const [selectedStartTime, setSelectedStartTime] = useState<Moment | undefined>();
+	const [selectedFinishTime, setSelectedFinishTime] = useState<Moment | undefined>();
 	const [taskname, setTaskname] = useState("");
 	const dispatch = useDispatch();
 	const currentData = useSelector(
@@ -34,7 +39,7 @@ const LogModal = (props: any) => {
 	}, [modalData]);
 
 	const handleOk = () => {
-		const minutes = selectedFinishTime.diff(selectedStartTime, "minutes");
+		const minutes = selectedFinishTime?.diff(selectedStartTime, "minutes");
 		const data: TIMELOG = {
 			id: modalData.openID,
 			taskname: taskname,
@@ -54,9 +59,9 @@ const LogModal = (props: any) => {
 	const handleCancel = () => {
 		dispatch(getTimeLogModal(false, ""));
 		setTaskname("");
-		setSelectedStartTime("");
-		setSelectedFinishTime("");
-		setSelectedDate("");
+		setSelectedStartTime(undefined);
+		setSelectedFinishTime(undefined);
+		setSelectedDate(undefined);
 	};
 	return (
 		<Modal
@@ -71,18 +76,18 @@ const LogModal = (props: any) => {
 		>
 			<LogForm
 				taskname={taskname}
-				setTaskname={(e: any) => {
+				setTaskname={(e: string) => {
 					setTaskname(e);
 				}}
-				setSelectedDate={(e: any) => {
+				setSelectedDate={(e: Moment) => {
 					setSelectedDate(e);
 				}}
 				selectedDate={selectedDate}
-				setSelectedStartTime={(e: any) => {
+				setSelectedStartTime={(e: Moment) => {
 					setSelectedStartTime(e);
 				}}
 				selectedStartTime={selectedStartTime}
-				setSelectedFinishTime={(e: any) => {
+				setSelectedFinishTime={(e: Moment) => {
 					setSelectedFinishTime(e);
 				}}
 				selectedFinishTime={selectedFinishTime}

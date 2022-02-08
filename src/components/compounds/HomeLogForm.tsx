@@ -4,7 +4,11 @@ import { AddNewLogData } from "../../redux/timeLog/timeLogActions";
 import LogForm from "../elements/LogForm";
 import { useDispatch } from "react-redux";
 import { Button, notification } from "antd";
-const HomeLogForm = (props: any) => {
+
+interface PROPS {
+	defaultDate: Moment;
+}
+const HomeLogForm: React.FC<PROPS> = (props) => {
 	const [selectedDate, setSelectedDate] = useState(props.defaultDate);
 	const [selectedStartTime, setSelectedStartTime] = useState<Moment>();
 	const [selectedFinishTime, setSelectedFinishTime] = useState<Moment>();
@@ -62,18 +66,18 @@ const HomeLogForm = (props: any) => {
 		<>
 			<LogForm
 				taskname={taskname}
-				setTaskname={(e: any) => {
+				setTaskname={(e: string) => {
 					setTaskname(e);
 				}}
-				setSelectedDate={(e: any) => {
+				setSelectedDate={(e: Moment) => {
 					setSelectedDate(e);
 				}}
 				selectedDate={selectedDate}
-				setSelectedStartTime={(e: any) => {
+				setSelectedStartTime={(e: Moment) => {
 					setSelectedStartTime(e);
 				}}
 				selectedStartTime={selectedStartTime}
-				setSelectedFinishTime={(e: any) => {
+				setSelectedFinishTime={(e: Moment) => {
 					setSelectedFinishTime(e);
 				}}
 				selectedFinishTime={selectedFinishTime}
